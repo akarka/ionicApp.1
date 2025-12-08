@@ -1,0 +1,8 @@
+node_modules
+.git
+.idea
+npm-debug.log
+Dockerfile
+docker-compose.yml
+.dockerignore
+araSinav/node_modules

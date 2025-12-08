@@ -1,0 +1,7 @@
+https://dummyjson.com/ adresinde bulunan REST API Backend olarak kullanılacaktır.
+
+Vize yerine geçecek olan projenizde yukarıda belirtilen API'de yer alan Giriş (Login), Kayıt (Register) ve Listeleme (Products) özellikleri kullanılacaktır. (https://dummyjson.com/docs/auth, https://dummyjson.com/products)
+
+Projenizi angular framework tabanlı boş (blank) Ionic projesi olarak başlattıktan sonra. Login, Register isimli 2 ayrı sayfa daha eklemeniz gerekmektedir. Bu sayfalara ilişkin tasarım tamamen serbest olup Login için eposta ve şifre, Register için ad soyad, eposta ve şifre ile işlem yapılacaktır. (Register olarak belirtilen işlem bahsi geçen API'de add user olarak kullanılmaktadır. Gerçek bir kayıt işlemi yapılmadığı için Login işlemi Register olunan kullanıcı ile değil API'de belirtilen örnek kullanıcılar ile yapılmalıdır.)
+
+Uygulama Home sayfası ile açılacaktır.  Bu sayfada dummyjson API'sinde yer alan https://dummyjson.com/products ile ürünler listelenecektir. Bu listeleme için ion-card, ion-img, ion-avatar, ion-thumbnail özellikleri kullanılabilir. Listeleme için REST API'de yer alan ürünün adı (title), açıklaması (description), fiyatı (price) ve resimleri (thumbnail, images) gösterilecektir. Her bir ürünün görselinin altında yer alan sepet düğmesi ile sepete ekle işlemi yapılacaktır. Home sayfasının yukarıdaki toolbarına eklenecek olan sepet düğmesine tıklandığında ise giriş yapılan kullanıcıya (https://dummyjson.com/docs/carts#carts-user) ait sepeti gösterme işlemi (modal ya da ion-alert) yapılacaktır. 
