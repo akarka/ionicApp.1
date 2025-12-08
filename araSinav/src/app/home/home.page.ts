@@ -1,21 +1,31 @@
 import { Component, OnInit } from '@angular/core';
-import { Product, ProductService } from '../product.service';
 
 @Component({
   selector: 'app-home',
   templateUrl: 'home.page.html',
   styleUrls: ['home.page.scss'],
+  standalone: false,
 })
 export class HomePage implements OnInit {
 
-  products: Product[] = [];
+  products: any[] = [];
+  private apiUrl = 'https://dummyjson.com/products';
 
-  constructor(private productService: ProductService) {}
+  constructor() {}
 
   ngOnInit() {
-    this.productService.getProducts().subscribe(res => {
-      this.products = res.products;
-    });
+    this.fetchProducts();
+  }
+
+  async fetchProducts() {
+    const limit = 6;
+    try {
+      const response = await fetch(`${this.apiUrl}?limit=${limit}`);
+      const data = await response.json();
+      this.products = data.products;
+    } catch (error) {
+      console.error('Error fetching products:', error);
+    }
   }
 
 }
