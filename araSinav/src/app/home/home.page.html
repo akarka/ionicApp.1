@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-title>
-      Products
+      AstromA
     </ion-title>
     <ion-buttons slot="end">
       <ion-icon name="moon"></ion-icon>
@@ -35,12 +35,7 @@
     </ion-row>
   </ion-grid>
 
-  <ion-alert
-    [isOpen]="isAlertOpen"
-    [header]="alertHeader"
-    [message]="alertMessage"
-    [buttons]="alertButtons"
-    (didDismiss)="setOpen(false)"
-  ></ion-alert>
+  <ion-alert [isOpen]="isAlertOpen" [header]="alertHeader" [message]="alertMessage" [buttons]="alertButtons"
+    (didDismiss)="setOpen(false)"></ion-alert>
 
 </ion-content>
