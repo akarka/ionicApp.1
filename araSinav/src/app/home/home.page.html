@@ -1,31 +1,19 @@
-<ion-header [translucent]="true">
+<ion-header>
   <ion-toolbar>
     <ion-title>
       Products
     </ion-title>
     <ion-buttons slot="end">
+      <ion-icon name="moon"></ion-icon>
+      <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)"></ion-toggle>
       <ion-button>
-        <ion-icon slot="icon-only" name="cart"></ion-icon>
+        <ion-icon slot="icon-only" name="cart" (click)="presentCartAlert()"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-list [inset]="true">
-    <ion-item>
-      <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)" justify="space-between">Dark
-        Mode</ion-toggle>
-    </ion-item>
-  </ion-list>
-
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">Products</ion-title>
-    </ion-toolbar>
-
-  </ion-header>
-
   <ion-grid>
     <ion-row>
       <ion-col size="12" size-md="6" size-lg="4" *ngFor="let product of products">
@@ -40,9 +28,19 @@
           <ion-card-content>
             {{ product.description }}
           </ion-card-content>
-          <ion-button expand="full" color="primary">Sepete Ekle</ion-button>
+          <ion-button expand="full" color="primary" (click)="addToCart([{id: product.id, quantity:1}])">Sepete
+            Ekle</ion-button>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <ion-alert
+    [isOpen]="isAlertOpen"
+    [header]="alertHeader"
+    [message]="alertMessage"
+    [buttons]="alertButtons"
+    (didDismiss)="setOpen(false)"
+  ></ion-alert>
+
 </ion-content>

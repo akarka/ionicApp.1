@@ -1,13 +1,33 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-title>register</ion-title>
-  </ion-toolbar>
-</ion-header>
-
-<ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">register</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-content>
+  <form (ngSubmit)="register()" [formGroup]="uyelikBilgisi">
+    <div class="input-group">
+      <ion-item>
+        <ion-input type="text" placeholder="Adınız" [formControl]="firstName"></ion-input>
+      </ion-item>
+      <div *ngIf="(firstName.dirty || firstName.touched) && firstName.errors" class="errors">
+        <span *ngIf="firstName.errors['required']">Ad Gereklidir</span>
+        <span *ngIf="firstName.errors['minlength']">Geçersiz Ad</span>
+      </div>
+      <ion-item>
+        <ion-input type="text" placeholder="Soyadınız" [formControl]="lastName"></ion-input>
+      </ion-item>
+      <div *ngIf="(lastName.dirty || lastName.touched) && lastName.errors" class="errors">
+        <span *ngIf="lastName.errors['required']">Soyad Gereklidir</span>
+        <span *ngIf="lastName.errors['lastName']">Geçersiz Soyad</span>
+      </div>
+      <ion-item>
+        <ion-input type="number" placeholder="Yaşınız" [formControl]="age"></ion-input>
+      </ion-item>
+      <div *ngIf="(age.dirty || age.touched) && age.errors" class="errors">
+        <span *ngIf="age.errors['required']">Yaşınızı Giriniz</span>
+        <span *ngIf="age.errors['pattern']">Yaşınız sadece sayı içerebilir.</span>
+      </div>
+    </div>
+    <ion-button type="submit" expand="block" [disabled]="!uyelikBilgisi.valid">
+      Kayıt Ol
+    </ion-button>
+    <ion-button [routerLink]="['/login']" expand="block" fill="clear" color="warning">
+      Giriş Yap
+    </ion-button>
+  </form>
 </ion-content>

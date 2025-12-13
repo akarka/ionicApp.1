@@ -5,13 +5,12 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    working_dir: /app
+    working_dir: /app/araSinav
     ports:
       - "8100:8100"
       - "35729:35729"
     volumes:
-      - ./araSinav:/app
-      - node_modules:/app/node_modules
+      - ./araSinav:/app/araSinav
     tty: true
     stdin_open: true
     command: sh -c "npm install && ionic serve --host=0.0.0.0 -- --poll=1000"

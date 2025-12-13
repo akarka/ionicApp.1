@@ -1,5 +1,7 @@
 {
-  "name": "ionic-app-base",
-  "integrations": {},
+  "name": "ionic-kadirakar",
+  "integrations": {
+    "capacitor": {}
+  },
   "type": "angular"
 }

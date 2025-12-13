@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Authentication } from './authentication';
+import { Preferences } from '@capacitor/preferences';
+
 
 @Component({
   selector: 'app-root',
@@ -7,5 +10,21 @@ import { Component } from '@angular/core';
   standalone: false,
 })
 export class AppComponent {
-  constructor() {}
+  constructor(private authentication: Authentication) {
+    this.kontrol();
+  }
+
+  async kontrol() {
+    const { value } = await Preferences.get({ key: 'ionicAuth_usertoken' });
+
+    if (value != null) {
+      console.log("Storage'da Token bulundu, Yönlendiriliyor.. ");
+      this.authentication.router.navigateByUrl('/home');
+    }
+    else
+      this.authentication.router.navigateByUrl('/login');
+
+
+  }
+
 }

@@ -8,7 +8,7 @@ WORKDIR /app
 RUN apk add --no-cache git python3 make g++
 
 # Ionic CLI, Capacitor CLI ve Angular CLI global kurulumu
-RUN npm install -g @ionic/cli@latest @capacitor/cli@7 @angular/cli@20
+RUN npm install -g @ionic/cli@latest @angular/cli@20 @capacitor/cli@7
 
 # Port açma
 EXPOSE 8100 35729
