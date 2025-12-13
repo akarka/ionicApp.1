@@ -28,14 +28,10 @@
           <ion-card-content>
             {{ product.description }}
           </ion-card-content>
-          <ion-button expand="full" color="primary" (click)="addToCart([{id: product.id, quantity:1}])">Sepete
-            Ekle</ion-button>
+          <ion-button expand="full" color="primary">Sepete Ekle</ion-button>
         </ion-card>
       </ion-col>
     </ion-row>
   </ion-grid>
-
-  <ion-alert [isOpen]="isAlertOpen" [header]="alertHeader" [message]="alertMessage" [buttons]="alertButtons"
-    (didDismiss)="setOpen(false)"></ion-alert>
 
 </ion-content>
