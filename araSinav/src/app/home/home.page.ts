@@ -49,13 +49,50 @@ export class HomePage implements OnInit {
     }
   }
 
-  async presentToast() {
+  async presentToast(mesaj: string) {
+    const toast = await this.toastController.create({
+      message: mesaj,
+      position: 'top',
+      duration: 2000
+    });
+    toast.present();
+
+
   }
 
   addToCart() {
-  }
+    fetch('https://dummyjson.com/carts/add', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        userId: 1,
+        products: [
+          {
+            id: 144,
+            quantity: 4,
+          },
+          {
+            id: 98,
+            quantity: 1,
+          },
+        ]
+      })
+    })
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP hatası: ${res.status}`);
+        }
+        return res.json();
+      })
+      .then(data => {
+        console.log(data);
+        this.presentToast('Ürün sepete eklendi.')
+      })
+      .catch(err => {
+        this.presentToast('Sepete eklerken hata.')
+        console.error('Fetch hatası:', err)
+      })
 
-  async presentAddedToCartAlert() {
   }
 
   async getCart() {
