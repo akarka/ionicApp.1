@@ -6,8 +6,8 @@
     <ion-buttons slot="end">
       <ion-icon name="moon"></ion-icon>
       <ion-toggle [(ngModel)]="paletteToggle" (ionChange)="toggleChange($event)"></ion-toggle>
-      <ion-button>
-        <ion-icon slot="icon-only" name="cart" (click)="presentCartAlert()"></ion-icon>
+      <ion-button (click)="presentCartAlert()">
+        <ion-icon slot="icon-only" name="cart"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -28,7 +28,7 @@
           <ion-card-content>
             {{ product.description }}
           </ion-card-content>
-          <ion-button expand="full" color="primary" (click)="addToCart()">Sepete Ekle</ion-button>
+          <ion-button expand="full" color="primary" (click)="addToCart(product)">Sepete Ekle</ion-button>
         </ion-card>
       </ion-col>
     </ion-row>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController, ToastController } from '@ionic/angular';
+import { Authentication } from '../authentication';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomePage implements OnInit {
 
   paletteToggle = false;
 
-  constructor(private toastController: ToastController, private alertController: AlertController) { }
+  constructor(private toastController: ToastController, private alertController: AlertController, private authentication: Authentication) { }
 
   ngOnInit() {
     this.fetchProducts();
@@ -56,11 +57,14 @@ export class HomePage implements OnInit {
       duration: 2000
     });
     toast.present();
-
-
   }
 
-  addToCart() {
+  getUserId() {
+    const currentId = this.authentication.users()
+    return currentId
+  }
+
+  addToCart(product: any) {
     fetch('https://dummyjson.com/carts/add', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -68,13 +72,9 @@ export class HomePage implements OnInit {
         userId: 1,
         products: [
           {
-            id: 144,
-            quantity: 4,
-          },
-          {
-            id: 98,
+            id: product.id,
             quantity: 1,
-          },
+          }
         ]
       })
     })
@@ -86,7 +86,7 @@ export class HomePage implements OnInit {
       })
       .then(data => {
         console.log(data);
-        this.presentToast('Ürün sepete eklendi.')
+        this.presentToast(`"${product.title}" sepete eklendi.`)
       })
       .catch(err => {
         this.presentToast('Sepete eklerken hata.')
@@ -96,9 +96,52 @@ export class HomePage implements OnInit {
   }
 
   async getCart() {
+    try {
+      const response = await fetch('https://dummyjson.com/carts/1')
+      if (!response.ok) {
+        throw new Error(`HTTP hatası: ${response.status}`);
+      }
+      const data = await response.json();
+      if (data && data.products) {
+        this.cart = data.products
+      } else {
+        this.cart = []
+      }
+    } catch (error) {
+      console.error('Sepet alınırken hata:', error)
+      this.presentToast('Sepet bilgisi alınamadı.')
+      this.cart = []
+    }
   }
 
   async presentCartAlert() {
-  }
+    await this.getCart()
 
+    if (!this.cart || this.cart.length === 0) {
+      const alert = await this.alertController.create({
+        header: 'Sepetim',
+        message: 'Sepetinizde henüz ürün bulunmuyor',
+        buttons: ['Kapat']
+      })
+      await alert.present()
+      return
+    }
+
+
+    const productMesaj = this.cart.map(p =>
+      `${p.title} (x${p.quantity}) - ${p.price * p.quantity}`
+    ).join('<br>');
+
+    const totalProductMiktar = this.cart.reduce((sum, p) => sum + p.quantity, 0)
+    const totalCartMiktar = this.cart.reduce((sum, p) => sum + (p.price * p.quantity), 0)
+
+    const mesaj = `${productMesaj}<br><br>Toplam Ürün Sayısı: ${totalProductMiktar}<br>Toplam Tutar: ${totalCartMiktar}`
+
+    const alert = await this.alertController.create({
+      header: 'Sepetim',
+      message: mesaj,
+      buttons: ['Kapat']
+    })
+    await alert.present()
+  }
 }
