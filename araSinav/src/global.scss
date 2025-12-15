@@ -37,12 +37,12 @@
 @import "@ionic/angular/css/palettes/dark.system.css";
 
 ion-content.auth-page {
-  --background: url('/assets/images/astroma.png') no-repeat center center / contain;
+  --background: url('/assets/images/astroma.png') repeat-y center center / contain;
   --auth-color: #d39b00;
 
   form {
     max-width: 400px;
-    margin: 200px auto;
+    margin: 250px auto;
     padding: 20px;
   }
 
@@ -62,5 +62,16 @@ ion-content.auth-page {
     margin: 20px auto 0 auto;
     font-weight: bold;
     width: 80%;
+  }
+}
+
+ion-content.home-page {
+  --home-color: #d39b00;
+
+  ion-button[type="genel1"] {
+    --background: var(--home-color);
+    --color: #000000;
+    margin: 20px auto 0 auto;
+    font-weight: bold;
   }
 }
