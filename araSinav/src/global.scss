@@ -36,12 +36,31 @@
 @import "@ionic/angular/css/palettes/dark.class.css";
 @import "@ionic/angular/css/palettes/dark.system.css";
 
-ion-item {
-    --transition: none;
-}
+ion-content.auth-page {
+  --background: url('/assets/images/astroma.png') no-repeat center center / contain;
+  --auth-color: #d39b00;
 
-ion-content {
-    --padding-top: 35%;
-    --padding-start: 10%;
-    --padding-end: 10%;
+  form {
+    max-width: 400px;
+    margin: 200px auto;
+    padding: 20px;
+  }
+
+  ion-item {
+    --background: transparent;
+    --border-color: var(--auth-color);
+    --border-style: solid;
+    --color: var(--auth-color);
+  }
+
+  ion-button[type="submit"] {
+    --background: transparent;
+    --border-color: var(--auth-color);
+    --border-style: solid;
+    --border-radius: 30px;
+    --color: var(--auth-color);
+    margin: 20px auto 0 auto;
+    font-weight: bold;
+    width: 80%;
+  }
 }
